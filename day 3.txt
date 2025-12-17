@@ -1,0 +1,164 @@
+#include <stdio.h>
+
+long long F(long long n) {
+    long long ans = 1;
+    for (int i = 1; i < n + 1; ++i)
+        ans *= i;
+    return ans;
+}
+
+long long nCr(long long n, long long r) {
+    if (n < 0 || r < 0)
+        return 0;
+    return F(n) / (F(n - r) * F(r));
+}
+
+int main() {
+    long long e, m, h, x, y, z, XXX, ans;
+    scanf("%lld %lld %lld %lld %lld %lld", &x, &e, &y, &m, &z, &h);
+    char a, b, c;
+    scanf(" %c %c %c", &a, &b, &c);
+    long long mx = 0, my = 0, mz = 0;
+
+    ans = nCr(x, e) * nCr(y, m) * nCr(z, h);
+    printf("%lld\n", ans);
+
+    XXX = (int)(a - 'A') + 1;
+    if (XXX <= x)
+        mx++;
+    else if (XXX <= x + y)
+        my++;
+    else
+        mz++;
+    XXX = (int)(b - 'A') + 1;
+    if (XXX <= x)
+        mx++;
+    else if (XXX <= x + y)
+        my++;
+    else
+        mz++;
+
+    ans = ans - nCr(x - mx, e - mx) * nCr(y - my, m - my) * nCr(z - mz, h - mz);
+
+    XXX = (int)(c - 'A') + 1;
+    if (XXX <= x) {
+        mx++;
+        ans -= nCr(x - 1, e - 1) * nCr(y, m) * nCr(z, h);
+    } else if (XXX <= x + y) {
+        my++;
+        ans -= nCr(x, e) * nCr(y - 1, m - 1) * nCr(z, h);
+    } else {
+        mz++;
+        ans -= nCr(x, e) * nCr(y, m) * nCr(z - 1, h - 1);
+    }
+
+    ans = ans + 1 + nCr(x - mx, e - mx) * nCr(y - my, m - my) * nCr(z - mz, h - mz);
+    printf("%lld\n", ans);
+    return 0;
+}
+
+
+
+
+
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);
+    s[0] = toupper(s[0]);
+    for (int i = 1; i < strlen(s); i++) {
+        if (s[i - 1] == ' ') {
+            s[i] = toupper(s[i]);
+        } else {
+            s[i] = tolower(s[i]);
+        }
+    }
+    int len = strlen(s);
+    for (int i = 0; i < len; i++) {
+        if (!isalpha(s[i])) {
+            for (int j = i; j < len - 1; j++) {
+                s[j] = s[j + 1];
+            }
+            len--;
+            i--;
+        }
+    }
+    s[len] = '\0';
+    printf("%s\n", s);
+return 0;
+}
+
+
+
+
+
+
+#include<stdio.h>
+#include<math.h>
+int Bulb(int n){
+    return sqrt(n);
+}
+int main(){
+    int n;
+    scanf("%d",&n);
+    int ans=Bulb(n);
+    printf("%d",ans);
+}
+
+
+
+
+
+
+
+
+a=input()
+b=a.split()
+co={}
+for i in b:
+    co[i]=co.get(i,0)+1;
+max_key=max(co,key=co.get)
+print(max_key,co[max_key])
+
+
+
+
+
+
+
+t=int(input())
+for _ in range(t):
+    n=int(input())
+    lis=list(map(int,input().split()))
+    ans=[]
+    for val in lis:
+        if val not in ans:
+            ans.append(val)
+    print(len(ans))
+    print(*ans)
+
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    // Input lists
+    const char *subjects[] = {"The", "A", "My"};
+    const char *verbs[] = {"dog", "cat", "bird"};
+    const char *adjectives[] = {"quick", "lazy", "brown"};
+
+    // Output sentences
+    for (int i = 0; i < sizeof(subjects) / sizeof(subjects[0]); i++) {
+        for (int j = 0; j < sizeof(verbs) / sizeof(verbs[0]); j++) {
+            for (int k = 0; k < sizeof(adjectives) / sizeof(adjectives[0]); k++) {
+                printf("%s %s %s\n", subjects[i], verbs[j], adjectives[k]);
+            }
+        }
+    }
+
+    return 0;
+}
